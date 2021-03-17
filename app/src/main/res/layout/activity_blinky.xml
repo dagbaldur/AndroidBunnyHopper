@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".BlinkyActivity"
+	tools:ignore="ContentDescription">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar_layout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:theme="@style/AppTheme.AppBarOverlay">
+
+		<com.google.android.material.appbar.MaterialToolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<ScrollView
+		android:id="@+id/device_container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_below="@+id/appbar_layout"
+		android:visibility="gone"
+		tools:visibility="visible">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<com.google.android.material.card.MaterialCardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/activity_horizontal_margin">
+
+				<androidx.constraintlayout.widget.ConstraintLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<com.google.android.material.appbar.MaterialToolbar
+						android:id="@+id/accelerometer_data"
+						android:layout_width="0dp"
+						android:layout_height="?actionBarSize"
+						app:layout_constraintLeft_toLeftOf="parent"
+						app:layout_constraintRight_toRightOf="parent"
+						app:layout_constraintTop_toTopOf="parent"
+						app:title="@string/accelerometer"
+						app:titleMarginStart="@dimen/toolbar_title_margin" />
+
+
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/ax"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toLeftOf="parent"
+						app:layout_constraintRight_toLeftOf="@+id/ay"
+						app:layout_constraintTop_toBottomOf="@+id/accelerometer_data" />
+
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/ay"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toRightOf="@+id/ax"
+						app:layout_constraintRight_toLeftOf="@+id/az"
+						app:layout_constraintTop_toBottomOf="@+id/accelerometer_data" />
+
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/az"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toRightOf="@+id/ay"
+						app:layout_constraintRight_toRightOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/accelerometer_data" />
+
+
+
+				</androidx.constraintlayout.widget.ConstraintLayout>
+			</com.google.android.material.card.MaterialCardView>
+
+			<com.google.android.material.card.MaterialCardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/activity_horizontal_margin">
+
+				<androidx.constraintlayout.widget.ConstraintLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<com.google.android.material.appbar.MaterialToolbar
+						android:id="@+id/gyroscope_data"
+						android:layout_width="0dp"
+						android:layout_height="?actionBarSize"
+						app:layout_constraintLeft_toLeftOf="parent"
+						app:layout_constraintRight_toRightOf="parent"
+						app:layout_constraintTop_toTopOf="parent"
+						app:title="@string/gyroscope"
+						app:titleMarginStart="@dimen/toolbar_title_margin" />
+
+
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/gx"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toLeftOf="parent"
+						app:layout_constraintRight_toLeftOf="@+id/gy"
+						app:layout_constraintTop_toBottomOf="@+id/gyroscope_data" />
+
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/gy"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toRightOf="@+id/gx"
+						app:layout_constraintRight_toLeftOf="@+id/gz"
+						app:layout_constraintTop_toBottomOf="@+id/gyroscope_data" />
+
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/gz"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toRightOf="@+id/gy"
+						app:layout_constraintRight_toRightOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/gyroscope_data" />
+
+
+
+				</androidx.constraintlayout.widget.ConstraintLayout>
+			</com.google.android.material.card.MaterialCardView>
+			<com.google.android.material.card.MaterialCardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/activity_horizontal_margin">
+
+				<androidx.constraintlayout.widget.ConstraintLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<com.google.android.material.appbar.MaterialToolbar
+						android:id="@+id/magnet_data"
+						android:layout_width="0dp"
+						android:layout_height="?actionBarSize"
+						app:layout_constraintLeft_toLeftOf="parent"
+						app:layout_constraintRight_toRightOf="parent"
+						app:layout_constraintTop_toTopOf="parent"
+						app:title="@string/magnetometer"
+						app:titleMarginStart="@dimen/toolbar_title_margin" />
+
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/mx"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toLeftOf="parent"
+						app:layout_constraintRight_toLeftOf="@+id/my"
+						app:layout_constraintTop_toBottomOf="@+id/magnet_data" />
+
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/my"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toRightOf="@+id/mx"
+						app:layout_constraintRight_toLeftOf="@+id/mz"
+						app:layout_constraintTop_toBottomOf="@+id/magnet_data" />
+
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/mz"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toRightOf="@+id/my"
+						app:layout_constraintRight_toRightOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/magnet_data" />
+
+
+
+				</androidx.constraintlayout.widget.ConstraintLayout>
+			</com.google.android.material.card.MaterialCardView>
+
+
+			<com.google.android.material.card.MaterialCardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/activity_horizontal_margin"
+				android:layout_marginBottom="@dimen/activity_horizontal_margin">
+
+				<androidx.constraintlayout.widget.ConstraintLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<com.google.android.material.appbar.MaterialToolbar
+						android:id="@+id/button_tool_bar"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						app:layout_constraintLeft_toLeftOf="parent"
+						app:layout_constraintRight_toLeftOf="@+id/button_state"
+						app:layout_constraintTop_toTopOf="parent"
+						app:logo="@android:drawable/ic_media_play"
+						app:title="@string/title_button_state"
+						app:titleMarginStart="@dimen/toolbar_title_margin" />
+
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/button_state"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/save_state"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+						app:layout_constraintTop_toTopOf="parent"
+						app:layout_constraintLeft_toRightOf="@+id/button_tool_bar"
+						app:layout_constraintRight_toRightOf="parent" />
+
+
+					<com.google.android.material.appbar.MaterialToolbar
+						android:id="@+id/button_save_bar"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						app:layout_constraintBottom_toBottomOf="parent"
+						app:layout_constraintLeft_toLeftOf="parent"
+						app:layout_constraintRight_toLeftOf="@+id/button_save_state"
+						app:layout_constraintTop_toBottomOf="@+id/button_tool_bar"
+						app:logo="@android:drawable/ic_menu_save"
+						app:title="@string/title_save_state"
+						app:titleMarginStart="@dimen/toolbar_title_margin" />
+
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/button_save_state"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/save_state"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+						app:layout_constraintBottom_toBottomOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/button_state"
+						app:layout_constraintLeft_toRightOf="@+id/button_save_bar"
+						app:layout_constraintRight_toRightOf="parent" />
+
+
+				</androidx.constraintlayout.widget.ConstraintLayout>
+			</com.google.android.material.card.MaterialCardView>
+		</LinearLayout>
+	</ScrollView>
+
+	<LinearLayout
+		android:id="@+id/progress_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		android:gravity="center_horizontal"
+		android:orientation="vertical"
+		android:padding="@dimen/activity_horizontal_margin"
+		android:visibility="gone"
+		tools:visibility="gone">
+
+		<com.google.android.material.textview.MaterialTextView
+			android:id="@+id/connection_state"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_horizontal"
+			android:textSize="16sp"
+			tools:text="@string/state_connecting" />
+
+		<ProgressBar
+			style="?android:attr/progressBarStyleHorizontal"
+			android:layout_width="250dp"
+			android:layout_height="wrap_content"
+			android:indeterminate="true" />
+	</LinearLayout>
+
+	<include
+		android:id="@+id/not_supported"
+		layout="@layout/info_not_supported"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		android:visibility="gone"
+		tools:visibility="gone" />
+</RelativeLayout>

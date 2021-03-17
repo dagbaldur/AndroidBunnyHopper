@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="device_name" type="id" />
+    <item name="device_hr" type="id" />
+    <item name="device_sp" type="id" />
+    <item name="device_cad" type="id" />
+    <item name="device_pm" type="id" />
+    <item name="rssi" type="id" />
+    <item name="device_address" type="id" />
+</resources>

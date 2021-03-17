@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="@string/terrain_menu"
+        android:icon="@drawable/ic_filter"
+        app:showAsAction="ifRoom">
+        <menu>
+            <group
+                android:id="@+id/road_options"
+                android:checkableBehavior="single">
+                <item android:id="@+id/road"
+                    android:title="@string/menu_road"/>
+
+                <item android:id="@+id/mix"
+                    android:title="@string/menu_mix"/>
+
+                <item android:id="@+id/rock_garden"
+                    android:title="@string/menu_rock"/>
+
+                <item android:id="@+id/mud"
+                    android:title="@string/menu_mud"/>
+
+                <item android:id="@+id/bikepark"
+                    android:title="@string/menu_bikepark"/>
+
+                <item android:id="@+id/rough"
+                    android:title="@string/menu_rough"/>
+            </group>
+        </menu>
+    </item>
+    <item
+        android:title="@string/ride_action"
+        android:icon="@drawable/ic_filter"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item android:id="@+id/riding"
+                android:checkable="true"
+                android:checked="true"
+                android:title="@string/riding"/>
+
+            <item android:id="@+id/manual"
+                android:checkable="true"
+                android:title="@string/manual"/>
+
+            <item android:id="@+id/bh"
+                android:checkable="true"
+                android:title="@string/bh"/>
+
+            <item android:id="@+id/wheely"
+                android:checkable="true"
+                android:title="@string/wheely"/>
+
+            <item android:id="@+id/drop"
+                android:checkable="true"
+                android:title="@string/drop"/>
+
+            <item android:id="@+id/turns"
+                android:checkable="true"
+                android:title="@string/turns"/>
+
+            <item android:id="@+id/cornering"
+                android:checkable="true"
+                android:title="@string/cornering"/>
+
+            <item android:id="@+id/switchback"
+                android:checkable="true"
+                android:title="@string/switchback"/>
+
+            <item android:id="@+id/skidding"
+                android:checkable="true"
+                android:title="@string/skidding"/>
+
+            <item android:id="@+id/trackstand"
+                android:checkable="true"
+                android:title="@string/trackstand"/>
+
+            <item android:id="@+id/pickbike"
+                android:checkable="true"
+                android:title="@string/pickbike"/>
+        </menu>
+    </item>
+</menu>
