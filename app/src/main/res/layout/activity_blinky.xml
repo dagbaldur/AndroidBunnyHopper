@@ -68,6 +68,19 @@
 						app:layout_constraintTop_toBottomOf="@+id/accelerometer_data" />
 
 					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/ax2"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toLeftOf="parent"
+						app:layout_constraintRight_toLeftOf="@+id/ay"
+						app:layout_constraintTop_toBottomOf="@+id/ax" />
+
+
+					<com.google.android.material.textview.MaterialTextView
 						android:id="@+id/ay"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
@@ -78,6 +91,17 @@
 						app:layout_constraintLeft_toRightOf="@+id/ax"
 						app:layout_constraintRight_toLeftOf="@+id/az"
 						app:layout_constraintTop_toBottomOf="@+id/accelerometer_data" />
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/ay2"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toRightOf="@+id/ax"
+						app:layout_constraintRight_toLeftOf="@+id/az"
+						app:layout_constraintTop_toBottomOf="@+id/ay" />
 
 					<com.google.android.material.textview.MaterialTextView
 						android:id="@+id/az"
@@ -90,7 +114,17 @@
 						app:layout_constraintLeft_toRightOf="@+id/ay"
 						app:layout_constraintRight_toRightOf="parent"
 						app:layout_constraintTop_toBottomOf="@+id/accelerometer_data" />
-
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/az2"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toRightOf="@+id/ay"
+						app:layout_constraintRight_toRightOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/az" />
 
 
 				</androidx.constraintlayout.widget.ConstraintLayout>
@@ -127,6 +161,17 @@
 						app:layout_constraintLeft_toLeftOf="parent"
 						app:layout_constraintRight_toLeftOf="@+id/gy"
 						app:layout_constraintTop_toBottomOf="@+id/gyroscope_data" />
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/gx2"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toLeftOf="parent"
+						app:layout_constraintRight_toLeftOf="@+id/gy"
+						app:layout_constraintTop_toBottomOf="@+id/gx" />
 
 					<com.google.android.material.textview.MaterialTextView
 						android:id="@+id/gy"
@@ -139,6 +184,17 @@
 						app:layout_constraintLeft_toRightOf="@+id/gx"
 						app:layout_constraintRight_toLeftOf="@+id/gz"
 						app:layout_constraintTop_toBottomOf="@+id/gyroscope_data" />
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/gy2"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toRightOf="@+id/gx"
+						app:layout_constraintRight_toLeftOf="@+id/gz"
+						app:layout_constraintTop_toBottomOf="@+id/gy" />
 
 					<com.google.android.material.textview.MaterialTextView
 						android:id="@+id/gz"
@@ -151,8 +207,17 @@
 						app:layout_constraintLeft_toRightOf="@+id/gy"
 						app:layout_constraintRight_toRightOf="parent"
 						app:layout_constraintTop_toBottomOf="@+id/gyroscope_data" />
-
-
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/gz2"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toRightOf="@+id/gy"
+						app:layout_constraintRight_toRightOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/gz" />
 
 				</androidx.constraintlayout.widget.ConstraintLayout>
 			</com.google.android.material.card.MaterialCardView>
@@ -186,6 +251,17 @@
 						app:layout_constraintLeft_toLeftOf="parent"
 						app:layout_constraintRight_toLeftOf="@+id/my"
 						app:layout_constraintTop_toBottomOf="@+id/magnet_data" />
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/mx2"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toLeftOf="parent"
+						app:layout_constraintRight_toLeftOf="@+id/my"
+						app:layout_constraintTop_toBottomOf="@+id/mx" />
 
 					<com.google.android.material.textview.MaterialTextView
 						android:id="@+id/my"
@@ -198,6 +274,17 @@
 						app:layout_constraintLeft_toRightOf="@+id/mx"
 						app:layout_constraintRight_toLeftOf="@+id/mz"
 						app:layout_constraintTop_toBottomOf="@+id/magnet_data" />
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/my2"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toRightOf="@+id/mx"
+						app:layout_constraintRight_toLeftOf="@+id/mz"
+						app:layout_constraintTop_toBottomOf="@+id/my" />
 
 					<com.google.android.material.textview.MaterialTextView
 						android:id="@+id/mz"
@@ -210,7 +297,17 @@
 						app:layout_constraintLeft_toRightOf="@+id/my"
 						app:layout_constraintRight_toRightOf="parent"
 						app:layout_constraintTop_toBottomOf="@+id/magnet_data" />
-
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/mz2"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:text="@string/value"
+						android:textAllCaps="true"
+						android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+						app:layout_constraintLeft_toRightOf="@+id/my"
+						app:layout_constraintRight_toRightOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/mz" />
 
 
 				</androidx.constraintlayout.widget.ConstraintLayout>

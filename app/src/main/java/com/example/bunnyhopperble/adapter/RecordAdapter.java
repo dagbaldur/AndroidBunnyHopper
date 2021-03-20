@@ -61,10 +61,10 @@ public class RecordAdapter  {
         return record_session;
     }
 
-    public void addRecord(int roadType, int technique[],String sensor, Timestamp timestamp, float value){
+    public void addRecord(int roadType, int technique[],String location,int sensor, Timestamp timestamp, float value){
         if(record_state.getValue()) {
 
-            String formatted_values = timestamp.getTime() + "|" + roadType + "|" + sensor + "|" + value + "|" + java.util.Arrays.toString(technique);
+            String formatted_values = timestamp.getTime()  + "|" + location +"|" + sensor + "|" + value + "|" + roadType + "|" + java.util.Arrays.toString(technique);
             try {
                 FileOutputStream file = new FileOutputStream(String.valueOf(record_session),true);
                 OutputStreamWriter writer = new OutputStreamWriter(file, StandardCharsets.UTF_8);

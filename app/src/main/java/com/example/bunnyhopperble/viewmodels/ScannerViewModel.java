@@ -116,6 +116,7 @@ public class ScannerViewModel extends AndroidViewModel {
 	}
 
 
+
 	public void startScan() {
 		if (scannerStateLiveData.isScanning()) {
 			return;

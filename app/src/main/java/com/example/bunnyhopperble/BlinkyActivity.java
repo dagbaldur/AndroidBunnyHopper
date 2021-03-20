@@ -26,26 +26,109 @@ import com.google.android.material.textview.MaterialTextView;
 
 @SuppressWarnings("ConstantConditions")
 public class BlinkyActivity extends AppCompatActivity {
-	public static final String EXTRA_DEVICE = "no.nordicsemi.android.blinky.EXTRA_DEVICE";
+	public static final String DEVICE = "com.example.bunnyhopperble.DEVICE";
+	public static final String EXTRA_DEVICE = "com.example.bunnyhopperble.EXTRA_DEVICE";
+	//public static final String EXTRA_DEVICE = "no.nordicsemi.android.blinky.EXTRA_DEVICE";
 
 	private BlinkyViewModel viewModel;//viewmodel for device 1
 	private BlinkyViewModel viewModel2;//viewmodel for device 2
+	private static String status = "-1";
+	private int selected = -1;
 
-	//@BindView(R.id.button_tool_bar) SwitchMaterial record;
-	//@BindView(R.id.button_state) TextView record_msg;
-	//@BindView(R.id.button_save_bar) SwitchMaterial save;
-	//@BindView(R.id.button_save_state) TextView save_msg;
+	@Override
+	protected void onSaveInstanceState(Bundle savedInstanceState){
+		savedInstanceState.putInt(status,selected);
+		super.onSaveInstanceState(savedInstanceState);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
 		getMenuInflater().inflate(R.menu.tags, menu);
 		menu.findItem(R.id.road).setChecked(true);
+		/**
+		switch(selected){
+			case R.id.road:
+				menuItem = (MenuItem) menu.findItem(selected);
+				menuItem.setChecked();
+				item.setChecked(!item.isChecked());
+				viewModel.setRoadTag(0);
+				return true;
+			case R.id.mix:
+				item.setChecked(!item.isChecked());
+				viewModel.setRoadTag(1);
+				return true;
+			case R.id.rock_garden:
+				item.setChecked(!item.isChecked());
+				viewModel.setRoadTag(2);
+				return true;
+			case R.id.mud:
+				item.setChecked(!item.isChecked());
+				viewModel.setRoadTag(3);
+				return true;
+			case R.id.bikepark:
+				item.setChecked(!item.isChecked());
+				viewModel.setRoadTag(4);
+				return true;
+			case R.id.rough:
+				item.setChecked(!item.isChecked());
+				viewModel.setRoadTag(5);
+				return true;
+			//technique type tags
+			case R.id.riding:
+				item.setChecked(!item.isChecked());
+				viewModel.setTechniqueTag(0);
+				return true;
+			case R.id.manual:
+				item.setChecked(!item.isChecked());
+				viewModel.setTechniqueTag(1);
+				return true;
+			case R.id.bh:
+				item.setChecked(!item.isChecked());
+				viewModel.setTechniqueTag(2);
+				return true;
+			case R.id.wheely:
+				item.setChecked(!item.isChecked());
+				viewModel.setTechniqueTag(3);
+				return true;
+			case R.id.drop:
+				item.setChecked(!item.isChecked());
+				viewModel.setTechniqueTag(4);
+				return true;
+			case R.id.turns:
+				item.setChecked(!item.isChecked());
+				viewModel.setTechniqueTag(5);
+				return true;
+			case R.id.cornering:
+				item.setChecked(!item.isChecked());
+				viewModel.setTechniqueTag(6);
+				return true;
+			case R.id.switchback:
+				item.setChecked(!item.isChecked());
+				viewModel.setTechniqueTag(7);
+				return true;
+			case R.id.skidding:
+				item.setChecked(!item.isChecked());
+				viewModel.setTechniqueTag(8);
+				return true;
+			case R.id.trackstand:
+				item.setChecked(!item.isChecked());
+				viewModel.setTechniqueTag(9);
+				return true;
+			case R.id.pickbike:
+				item.setChecked(!item.isChecked());
+				viewModel.setTechniqueTag(10);
+				return true;
+		}
+		*/
 		return true;
 	}
 
+
 	@Override
 	public boolean onOptionsItemSelected(final MenuItem item) {
-		switch (item.getItemId()) {
+		selected = item.getItemId();
+		status = String.valueOf(!item.isChecked());
+		switch (selected) {
 			//road type tags
 			case R.id.road:
 				item.setChecked(!item.isChecked());
@@ -131,18 +214,30 @@ public class BlinkyActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		if(savedInstanceState != null){
+			selected = savedInstanceState.getInt(status);
+		}
 		setContentView(R.layout.activity_blinky);
 		ButterKnife.bind(this);
 
 		final Intent intent = getIntent();
-		final DiscoveredBluetoothDevice device = intent.getParcelableExtra(EXTRA_DEVICE);
+
+		//Retrieve the passed devices
+		final DiscoveredBluetoothDevice device = intent.getParcelableExtra(DEVICE);
+		final DiscoveredBluetoothDevice device2 = intent.getParcelableExtra(EXTRA_DEVICE);
+
 		final String deviceName = device.getName();
 		final String deviceAddress = device.getAddress();
+		final String deviceName2 = device2.getName();
+		final String deviceAddress2 = device2.getAddress();
 
-		final MaterialToolbar toolbar = findViewById(R.id.toolbar);
+
 		// Set up views.
+		final MaterialToolbar toolbar = findViewById(R.id.toolbar);
 		final MaterialTextView record_text = findViewById(R.id.button_state);
 		final MaterialTextView save_text = findViewById(R.id.button_save_state);
+
 		//Accelerometer view
 		final TextView tax = findViewById(R.id.ax);
 		final TextView tay = findViewById(R.id.ay);
@@ -152,29 +247,46 @@ public class BlinkyActivity extends AppCompatActivity {
 		final TextView tgx = findViewById(R.id.gx);
 		final TextView tgy = findViewById(R.id.gy);
 		final TextView tgz = findViewById(R.id.gz);
+
 		//Magne view
 		final TextView tmx = findViewById(R.id.mx);
 		final TextView tmy = findViewById(R.id.my);
 		final TextView tmz = findViewById(R.id.mz);
 
+		//Accelerometer view 2
+		final TextView tax2 = findViewById(R.id.ax2);
+		final TextView tay2 = findViewById(R.id.ay2);
+		final TextView taz2 = findViewById(R.id.az2);
+
+		//Gyro view 2
+		final TextView tgx2 = findViewById(R.id.gx2);
+		final TextView tgy2 = findViewById(R.id.gy2);
+		final TextView tgz2 = findViewById(R.id.gz2);
+
+		//Magne view 2
+		final TextView tmx2 = findViewById(R.id.mx2);
+		final TextView tmy2 = findViewById(R.id.my2);
+		final TextView tmz2 = findViewById(R.id.mz2);
+
+
 		final MaterialToolbar record = findViewById(R.id.button_tool_bar);
 		final MaterialToolbar save = findViewById(R.id.button_save_bar);
+
 		//container
 		final LinearLayout progressContainer = findViewById(R.id.progress_container);
 		final TextView connectionState = findViewById(R.id.connection_state);
 		final View content = findViewById(R.id.device_container);
 		final View notSupported = findViewById(R.id.not_supported);
 
-
-
 		toolbar.setTitle(deviceName != null ? deviceName : getString(R.string.unknown_device));
 		toolbar.setSubtitle(deviceAddress);
+
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		// Configure the view model.
+		// Configure the view model, send both devices here!
 		viewModel = new ViewModelProvider(this).get(BlinkyViewModel.class);
-		viewModel.connect(device);
+		viewModel.connect(device,device2);
 
 		//record.setOnCheckedChangeListener((buttonView,isChecked) -> viewModel.setRecordingState(isChecked));
 		record.setOnClickListener(
@@ -199,6 +311,7 @@ public class BlinkyActivity extends AppCompatActivity {
 				new View.OnClickListener(){
 					@Override
 					public void onClick(View view) {
+
 						//int status = viewModel.getSavedState().getValue();
 						save_text.setText("Saving...");
 						record_text.setText("Recording stopped.");
@@ -208,6 +321,7 @@ public class BlinkyActivity extends AppCompatActivity {
 
 				}
 		);
+
 		//save.setOnCheckedChangeListener((buttonView,isChecked) -> viewModel.saveRecording());
 		//viewModel.setRecordingState();
 		viewModel.getConnectionState().observe(this, state -> {
@@ -240,7 +354,7 @@ public class BlinkyActivity extends AppCompatActivity {
 			}
 		});
 
-
+		
 		viewModel.getRecordingState().observe(this, value-> {
 			if(value){
 				record_text.setText("Recording...");
@@ -267,18 +381,31 @@ public class BlinkyActivity extends AppCompatActivity {
 			}
 		});
 
-		viewModel.getAx().observe(this, value-> { tax.setText(value); });
-		viewModel.getAy().observe(this, value-> { tay.setText(value); });
-		viewModel.getAz().observe(this, value-> { taz.setText(value); });
+		viewModel.getAllValues().observe(this, value-> {
+			if(value[0].contentEquals("front")){
+				tax.setText(String.valueOf(value[1]));
+				tay.setText(String.valueOf(value[2]));
+				taz.setText(String.valueOf(value[3]));
+				tgx.setText(String.valueOf(value[7]));
+				tgy.setText(String.valueOf(value[8]));
+				tgz.setText(String.valueOf(value[9]));
+				tmx.setText(String.valueOf(value[4]));
+				tmy.setText(String.valueOf(value[5]));
+				tmz.setText(String.valueOf(value[6]));
+			}
+			else{
+				tax2.setText(String.valueOf(value[1]));
+				tay2.setText(String.valueOf(value[2]));
+				taz2.setText(String.valueOf(value[3]));
+				tgx2.setText(String.valueOf(value[7]));
+				tgy2.setText(String.valueOf(value[8]));
+				tgz2.setText(String.valueOf(value[9]));
+				tmx2.setText(String.valueOf(value[4]));
+				tmy2.setText(String.valueOf(value[5]));
+				tmz2.setText(String.valueOf(value[6]));
+			}
 
-		viewModel.getGx().observe(this, value-> { tgx.setText(value); });
-		viewModel.getGy().observe(this, value-> { tgy.setText(value); });
-		viewModel.getGz().observe(this, value-> { tgz.setText(value); });
-
-		viewModel.getMx().observe(this, value-> { tmx.setText(value); });
-		viewModel.getMy().observe(this, value-> { tmy.setText(value); });
-		viewModel.getMz().observe(this, value-> { tmz.setText(value); });
-
+		});
 
 	}
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +38,8 @@ public class Scanner extends AppCompatActivity implements DevicesAdapter.OnItemC
     private static final int REQUEST_ACCESS_FINE_LOCATION = 1022; // random number
 
     private ScannerViewModel scannerViewModel;
+    DiscoveredBluetoothDevice device1;
+    DiscoveredBluetoothDevice device2;
 
     @BindView(R.id.state_scanning) View scanningView;
     @BindView(R.id.no_devices) View emptyView;
@@ -110,10 +113,24 @@ public class Scanner extends AppCompatActivity implements DevicesAdapter.OnItemC
 
     @Override
     public void onItemClick(@NonNull final DiscoveredBluetoothDevice device) {
-        final Intent controlBlinkIntent = new Intent(this, BlinkyActivity.class);
-        controlBlinkIntent.putExtra(BlinkyActivity.EXTRA_DEVICE, device);
-        startActivity(controlBlinkIntent);
+
+        if(device1 == null) {
+            device1 = device;
+            Log.i("BLEDevice","Received "+device1.getAddress());
+        }
+        if(device1 != null && device1 != device && device2 == null){
+            device2 = device;
+            Log.i("BLEDevice","Received "+device2.getAddress());
+        }
+        if(device1 != null && device2 != null){
+            final Intent controlBlinkIntent = new Intent(this, BlinkyActivity.class);
+            controlBlinkIntent.putExtra(BlinkyActivity.DEVICE, device1);
+            controlBlinkIntent.putExtra(BlinkyActivity.EXTRA_DEVICE, device2);
+            startActivity(controlBlinkIntent);
+        }
     }
+
+
 
     @Override
     public void onRequestPermissionsResult(final int requestCode,
