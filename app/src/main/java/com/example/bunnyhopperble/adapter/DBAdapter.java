@@ -94,41 +94,47 @@ public class DBAdapter extends SQLiteOpenHelper {
         int j = 0;
         ArrayList<Object> values = prepareEntries();
         if(values.size() > 0) {
-            SQLiteDatabase database = this.getWritableDatabase();
-
+            Log.i("DBAdapter",+values.size()+" entries prepared to save");
             try {
-                save_state.setValue(1);
-                Log.i("DBAdapter", "Saving to DB...");
-                database.beginTransaction();
+                SQLiteDatabase database = this.getWritableDatabase();
+                try {
+                    save_state.postValue(1);
+                    Log.i("DBAdapter", "Saving to DB...");
+                    database.beginTransaction();
 
-                String sql = "INSERT INTO " + table + "(FILENAME,TIME,LOCATION,SENSOR,VALUE,ROAD,TECHNIQUES) VALUES(?,?,?,?,?,?,?)";
-                SQLiteStatement statement = database.compileStatement(sql);
+                    String sql = "INSERT INTO " + table + "(FILENAME,TIME,LOCATION,SENSOR,VALUE,ROAD,TECHNIQUES) VALUES(?,?,?,?,?,?,?)";
+                    SQLiteStatement statement = database.compileStatement(sql);
 
-                for (int i = 0; i < values.size(); i++) {
-                    if(i%7 == 0) {
-                        statement.clearBindings();
-                        statement.bindString(1, values.get(i).toString());//filename
-                        statement.bindString(2, values.get(i + 1).toString());//time
-                        statement.bindString(3, values.get(i + 2).toString());//location
-                        statement.bindString(4, values.get(i + 3).toString());//sensor
-                        statement.bindDouble(5, (double) values.get(i + 4));//value
-                        statement.bindString(6, values.get(i + 5).toString());//road
-                        statement.bindString(7, values.get(i + 6).toString());//technique
-                        statement.executeInsert();
-                        j++;
+                    for (int i = 0; i < values.size(); i++) {
+                        if (i % 7 == 0) {
+                            statement.clearBindings();
+                            statement.bindString(1, values.get(i).toString());//filename
+                            statement.bindString(2, values.get(i + 1).toString());//time
+                            statement.bindString(3, values.get(i + 2).toString());//location
+                            statement.bindString(4, values.get(i + 3).toString());//sensor
+                            statement.bindDouble(5, (double) values.get(i + 4));//value
+                            statement.bindString(6, values.get(i + 5).toString());//road
+                            statement.bindString(7, values.get(i + 6).toString());//technique
+                            statement.executeInsert();
+                            j++;
+                        }
                     }
+                    database.setTransactionSuccessful();
+                    save_state.postValue(2);
+                    Log.i("DBAdapter", "Saved " + j + " registries to DB");
+                } catch (Exception e) {
+                    save_state.postValue(4);
+                    Log.e("DBAdapter", "Error encountered: " + e);
+                } finally {
+
+                    database.endTransaction();
                 }
-                database.setTransactionSuccessful();
-                save_state.setValue(2);
-                Log.i("DBAdapter", "Saved " + j + " registries to DB");
-            } catch (Exception e) {
-                save_state.setValue(4);
-                Log.w("DBAdapter", "Error encountered: " + e);
-            } finally {
-                database.endTransaction();
+            }catch(Exception e){
+                save_state.postValue(4);
+                Log.e("DBAdapter", "Database error: " + e);
             }
         }else{
-            save_state.setValue(3);
+            save_state.postValue(3);
             Log.i("DBAdapter", "No entries to save...");
         }
     }

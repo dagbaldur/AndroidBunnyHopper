@@ -5,11 +5,14 @@
     ride_action
     <string name="ride_action">Select action tag</string>
     <string name="terrain_menu">Terrain type</string>
+    <string name="front_sensor">SensorID</string>
+    <string name="back_sensor">SensorID</string>
     <string name="menu_road">Road</string>
     <string name="menu_mix">Mix terrain</string>
     <string name="menu_rock">Rock garden</string>
     <string name="menu_bikepark">Bikepark</string>
     <string name="menu_rough">Mix rough</string>
+    <string name="menu_pt">Pumptrack</string>
     <string name="menu_mud">Mix muddy</string>
     <string name="riding">Riding</string>
     <string name="manual">Manual</string>
@@ -17,16 +20,19 @@
     <string name="wheely">Wheely</string>
     <string name="drop">Drop</string>
     <string name="turns">Turns</string>
+    <string name="jump">Jump</string>
     <string name="cornering">Corner</string>
     <string name="switchback">Switchback</string>
     <string name="skidding">Skidding</string>
     <string name="trackstand">Trackstand</string>
     <string name="pickbike">Pick bike</string>
+    <string name="main_act">Technique Selection</string>
     <string name="menu_filter_hr_uuid">Find HR sensor</string>
     <string name="menu_filter_speed_uuid">Find Speed sensor</string>
     <string name="menu_filter_cad_uuid">Find Cadence sensor</string>
     <string name="menu_filter_cpm_uuid">Find Power meter</string>
     <string name="menu_filter_nearby">Only nearby devices</string>
+    <string name="bike_view">Main bike view</string>
     <string name="accelerometer">Accelerometer data</string>
     <string name="gyroscope">Gyroscope data</string>
     <string name="magnetometer">Magnetometer data</string>
@@ -40,12 +46,18 @@
     <string name="save_state">State</string>
     <string name="record_state">State</string>
     <string name="button_saved_pressed">Saved</string>
+    <string name="saving">Saving...</string>
+    <string name="uploading">Uploading...</string>
     <string name="button_saved_released">Not saved</string>
+    <string name="button_upload">Upload</string>
     <string name="button_pressed">Recording</string>
+    <string name="button_start">Start</string>
+    <string name="button_stop">Stop</string>
     <string name="button_released">Stopped recording</string>
     <string name="button_unknown">Unknown</string>
     <string name="led_summary">Toggle the switch to turn the LED 3 on or off.</string>
     <string name="button_summary">Press the button to start recording.</string>
+    <string name="bt_device">Device</string>
 
     <string name="location_permission_title">LOCATION PERMISSION REQUIRED</string>
     <string name="location_permission_info">From Android 6.0 Marshmallow onwards the application requires Location permission in order to scan for Bluetooth Low Energy devices.
@@ -72,4 +84,39 @@
 
     <string name="state_connecting">Connecting…</string>
     <string name="state_initializing">Initializing…</string>
+
+
+    <string-array name="terrain_array">
+        <item>Road</item>
+        <item>Gravel road</item>
+        <item>Bike Park</item>
+        <item>Trail</item>
+        <item>Pumptrack</item>
+        <item>Rock Garden</item>
+    </string-array>
+    <string-array name="condition_array">
+        <item>Grippy</item>
+        <item>Packed</item>
+        <item>Muddy</item>
+        <item>Dry</item>
+    </string-array>
+    <string-array name="sub_conditions">
+        <item>Smooth</item>
+        <item>Bitten</item>
+        <item>Rooty</item>
+        <item>Rocky</item>
+        <item>Mix</item>
+    </string-array>
+    <string-array name="gnarly_array">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+        <item>Insane</item>
+    </string-array>
+    <string-array name="navigation_drawer_items_array">
+        <item>Test 1</item>
+        <item>Test 2</item>
+        <item>Test 3</item>
+    </string-array>
+
 </resources>

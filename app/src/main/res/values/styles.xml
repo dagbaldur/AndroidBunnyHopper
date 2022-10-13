@@ -46,4 +46,7 @@
 	<style name="AppTheme.SplashScreen">
 		<item name="colorPrimaryDark">@android:color/transparent</item>
 	</style>
+	<style name="Theme.AppCompat.NoActionBar">
+
+	</style>
 </resources>

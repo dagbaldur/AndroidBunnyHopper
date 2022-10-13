@@ -3,6 +3,7 @@ package com.example.bunnyhopperble;
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -11,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -112,9 +115,12 @@ public class Scanner extends AppCompatActivity implements DevicesAdapter.OnItemC
     }
 
     @Override
-    public void onItemClick(@NonNull final DiscoveredBluetoothDevice device) {
-
+    public void onItemClick(@NonNull final DiscoveredBluetoothDevice device,View view, int position) {
+        //TextView textview = (TextView) view.findViewById(R.id.device_address);
+        RelativeLayout selected = (RelativeLayout) view.findViewById(R.id.device_container);
+        selected.setBackgroundColor(Color.parseColor("#FFB8BABD"));
         if(device1 == null) {
+
             device1 = device;
             Log.i("BLEDevice","Received "+device1.getAddress());
         }

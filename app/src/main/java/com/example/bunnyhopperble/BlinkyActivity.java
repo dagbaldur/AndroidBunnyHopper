@@ -28,10 +28,11 @@ import com.google.android.material.textview.MaterialTextView;
 public class BlinkyActivity extends AppCompatActivity {
 	public static final String DEVICE = "com.example.bunnyhopperble.DEVICE";
 	public static final String EXTRA_DEVICE = "com.example.bunnyhopperble.EXTRA_DEVICE";
+	private String device1Address;
+	private String device2Address;
 	//public static final String EXTRA_DEVICE = "no.nordicsemi.android.blinky.EXTRA_DEVICE";
 
 	private BlinkyViewModel viewModel;//viewmodel for device 1
-	private BlinkyViewModel viewModel2;//viewmodel for device 2
 	private static String status = "-1";
 	private int selected = -1;
 
@@ -45,6 +46,9 @@ public class BlinkyActivity extends AppCompatActivity {
 	public boolean onCreateOptionsMenu(final Menu menu) {
 		getMenuInflater().inflate(R.menu.tags, menu);
 		menu.findItem(R.id.road).setChecked(true);
+		menu.findItem((R.id.device1)).setChecked(true);
+		menu.findItem((R.id.device1)).setTitle(device1Address);
+		menu.findItem((R.id.device2)).setTitle(device2Address);
 		/**
 		switch(selected){
 			case R.id.road:
@@ -154,6 +158,10 @@ public class BlinkyActivity extends AppCompatActivity {
 				item.setChecked(!item.isChecked());
 				viewModel.setRoadTag(5);
 				return true;
+			case R.id.pumptrack:
+				item.setChecked(!item.isChecked());
+				viewModel.setRoadTag(6);
+				return true;
 			//technique type tags
 			case R.id.riding:
 				item.setChecked(!item.isChecked());
@@ -199,6 +207,15 @@ public class BlinkyActivity extends AppCompatActivity {
 				item.setChecked(!item.isChecked());
 				viewModel.setTechniqueTag(10);
 				return true;
+			//devices
+			case R.id.device1:
+				item.setChecked(!item.isChecked());
+				viewModel.swapFront();
+				return true;
+			case R.id.device2:
+				item.setChecked(!item.isChecked());
+				viewModel.swapFront();
+				return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -227,11 +244,8 @@ public class BlinkyActivity extends AppCompatActivity {
 		final DiscoveredBluetoothDevice device = intent.getParcelableExtra(DEVICE);
 		final DiscoveredBluetoothDevice device2 = intent.getParcelableExtra(EXTRA_DEVICE);
 
-		final String deviceName = device.getName();
-		final String deviceAddress = device.getAddress();
-		final String deviceName2 = device2.getName();
-		final String deviceAddress2 = device2.getAddress();
-
+		device1Address = device.getAddress();
+		device2Address = device2.getAddress();
 
 		// Set up views.
 		final MaterialToolbar toolbar = findViewById(R.id.toolbar);
@@ -278,8 +292,8 @@ public class BlinkyActivity extends AppCompatActivity {
 		final View content = findViewById(R.id.device_container);
 		final View notSupported = findViewById(R.id.not_supported);
 
-		toolbar.setTitle(deviceName != null ? deviceName : getString(R.string.unknown_device));
-		toolbar.setSubtitle(deviceAddress);
+		toolbar.setTitle("Hop");
+		toolbar.setSubtitle("Recorder");
 
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -302,6 +316,7 @@ public class BlinkyActivity extends AppCompatActivity {
 						}else {//for pausing...right now inactive really
 							record_text.setText("Recording paused.");
 							record.setLogo(android.R.drawable.ic_media_play);
+							viewModel.pauseRecording();
 						}
 					}
 

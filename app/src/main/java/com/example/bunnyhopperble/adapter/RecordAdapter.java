@@ -25,6 +25,7 @@ public class RecordAdapter  {
     private final MutableLiveData<Boolean> record_state = new MutableLiveData<>(false);
     private final File directory;
     private File record_session;
+    private boolean deleted = false;
     private final static String DIRECTORY_NAME = "/BunnyHopper/";
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -53,6 +54,7 @@ public class RecordAdapter  {
             String file_name = String.format("BunnyLog%s.txt", now());
             Log.i("RecordAdapter","Writting into "+file_name);
             record_session = new File(directory,file_name);
+            deleted = false;
             changeRecording();
         }
     }
@@ -91,12 +93,14 @@ public class RecordAdapter  {
             Log.e("Directory","Cannot delete record");
             return false;
         }
+        deleted = true;
         String file_name = String.format("BunnyLog%s.txt", now());
         record_session = new File(directory,file_name);
         //changeRecording();
         return true;
     }
 
+    public boolean isDeleted(){ return deleted; }
 
     public void changeRecording(){
         record_state.setValue(!record_state.getValue());

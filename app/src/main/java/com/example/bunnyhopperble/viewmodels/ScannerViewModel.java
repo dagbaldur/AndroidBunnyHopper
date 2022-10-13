@@ -109,6 +109,7 @@ public class ScannerViewModel extends AndroidViewModel {
 
 	public void filterByDistance(final boolean nearbyOnly) {
 		preferences.edit().putBoolean(PREFS_FILTER_NEARBY_ONLY, nearbyOnly).apply();
+
 		if (devicesLiveData.filterByDistance(nearbyOnly))
 			scannerStateLiveData.recordFound();
 		else
@@ -124,7 +125,7 @@ public class ScannerViewModel extends AndroidViewModel {
 
 		// Scanning settings
 		final ScanSettings settings = new ScanSettings.Builder()
-				.setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
+				.setScanMode(ScanSettings.SCAN_MODE_BALANCED)
 				.setReportDelay(500)
 				.setUseHardwareBatchingIfSupported(false)
 				.build();
@@ -145,9 +146,6 @@ public class ScannerViewModel extends AndroidViewModel {
 	private final ScanCallback scanCallback = new ScanCallback() {
 		@Override
 		public void onScanResult(final int callbackType, @NonNull final ScanResult result) {
-			// This callback will be called only if the scan report delay is not set or is set to 0.
-
-			// If the packet has been obtained while Location was disabled, mark Location as not required
 			if (Utils.isLocationRequired(getApplication()) && !Utils.isLocationEnabled(getApplication()))
 				Utils.markLocationNotRequired(getApplication());
 
@@ -159,9 +157,6 @@ public class ScannerViewModel extends AndroidViewModel {
 
 		@Override
 		public void onBatchScanResults(@NonNull final List<ScanResult> results) {
-			// This callback will be called only if the report delay set above is greater then 0.
-
-			// If the packet has been obtained while Location was disabled, mark Location as not required
 			if (Utils.isLocationRequired(getApplication()) && !Utils.isLocationEnabled(getApplication()))
 				Utils.markLocationNotRequired(getApplication());
 
@@ -169,6 +164,7 @@ public class ScannerViewModel extends AndroidViewModel {
 			for (final ScanResult result : results)
 				atLeastOneMatchedFilter = devicesLiveData.deviceDiscovered(result) || atLeastOneMatchedFilter;
 			if (atLeastOneMatchedFilter) {
+
 				devicesLiveData.applyFilter();
 				scannerStateLiveData.recordFound();
 			}

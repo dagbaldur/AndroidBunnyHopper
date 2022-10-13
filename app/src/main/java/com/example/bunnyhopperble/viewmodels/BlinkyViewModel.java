@@ -36,7 +36,8 @@ public class BlinkyViewModel extends AndroidViewModel {
 	private final DBAdapter db;
 	private RecordAdapter record;
 	public MediatorLiveData<String[]> dataMerger = new MediatorLiveData<>();
-	private final MutableLiveData<String[]> sensorsData = new MutableLiveData<>();
+	private String device1OrientationTag;
+	private String device2OrientationTag;
 	public int roadType = 0;
 	public int techniqueType[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 
@@ -47,15 +48,17 @@ public class BlinkyViewModel extends AndroidViewModel {
 		record = new RecordAdapter(super.getApplication().getApplicationContext());
 		frontManager = new BlinkyManager(getApplication());
 		backManager = new BlinkyManager(getApplication());
+		device1OrientationTag = "front";
+		device2OrientationTag = "back";
 		dataMerger.addSource(frontManager.getArray(),
 				new Observer<float[]>(){
 					@Override
 					public void onChanged(float[] values){
 						DecimalFormat df = new DecimalFormat("#.###");
 						df.setRoundingMode(RoundingMode.CEILING);
-						recordValues("front",values);
+						recordValues(device1OrientationTag,values);
 						String[] sendValues = new String[values.length + 1];
-						sendValues[0] = "front";
+						sendValues[0] = device1OrientationTag;
 						for(int i=0;i<values.length;i++){
 							sendValues[i+1] = df.format(values[i]);
 						}
@@ -69,9 +72,9 @@ public class BlinkyViewModel extends AndroidViewModel {
 					public void onChanged(float[] values){
 						DecimalFormat df = new DecimalFormat("#.###");
 						df.setRoundingMode(RoundingMode.CEILING);
-						recordValues("back",values);
+						recordValues(device2OrientationTag,values);
 						String[] sendValues = new String[values.length + 1];
-						sendValues[0] = "back";
+						sendValues[0] = device2OrientationTag;
 						for(int i=0;i<values.length;i++){
 							sendValues[i+1] = df.format(values[i]);
 						}
@@ -96,6 +99,11 @@ public class BlinkyViewModel extends AndroidViewModel {
 		return backManager.getArray();
 	}
 
+	public void swapFront(){
+		String temp = device1OrientationTag;
+		device1OrientationTag = device2OrientationTag;
+		device2OrientationTag = temp;
+	}
 	public LiveData<String[]> getAllValues(){
 		return dataMerger;
 	}
@@ -111,10 +119,15 @@ public class BlinkyViewModel extends AndroidViewModel {
 
 			db.setFile(record.getFilename());
 			//async
-			db.saveData();
-			if (db.getSavedState().getValue() < 3) {
-				record.deleteRecording();
-			}
+			new Thread(new Runnable(){
+				@Override
+				public void run(){
+					db.saveData();
+					if (db.getSavedState().getValue() < 3) {
+						record.deleteRecording();
+					}
+				}
+			}).start();
 		}
 	}
 
@@ -123,7 +136,17 @@ public class BlinkyViewModel extends AndroidViewModel {
 		Log.i("ViewModel","Calling to start recording");
 		if(!record.getRecordingState().getValue()) {
 			db.setSavedState(0);
-			record.newFile();
+			if(record.isDeleted())
+				record.newFile();
+			else
+				record.changeRecording();
+		}
+	}
+
+	public void pauseRecording(){
+		Log.i("ViewModel","Pausing recording");
+		if(record.getRecordingState().getValue()){
+			record.changeRecording();
 		}
 	}
 

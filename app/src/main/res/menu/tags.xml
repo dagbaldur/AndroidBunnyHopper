@@ -4,7 +4,7 @@
 
     <item
         android:title="@string/terrain_menu"
-        android:icon="@drawable/ic_filter"
+        android:icon="@drawable/ic_terrain"
         app:showAsAction="ifRoom">
         <menu>
             <group
@@ -27,12 +27,15 @@
 
                 <item android:id="@+id/rough"
                     android:title="@string/menu_rough"/>
+
+                <item android:id="@+id/pumptrack"
+                    android:title="@string/menu_pt"/>
             </group>
         </menu>
     </item>
     <item
         android:title="@string/ride_action"
-        android:icon="@drawable/ic_filter"
+        android:icon="@drawable/techniques"
         app:showAsAction="ifRoom">
         <menu>
             <item android:id="@+id/riding"
@@ -55,6 +58,7 @@
             <item android:id="@+id/drop"
                 android:checkable="true"
                 android:title="@string/drop"/>
+
 
             <item android:id="@+id/turns"
                 android:checkable="true"
@@ -79,6 +83,21 @@
             <item android:id="@+id/pickbike"
                 android:checkable="true"
                 android:title="@string/pickbike"/>
+        </menu>
+    </item>
+    <item
+        android:title="@string/terrain_menu"
+        android:icon="@drawable/ic_bluetooth_menu"
+        app:showAsAction="ifRoom">
+        <menu>
+            <group
+                android:id="@+id/devices"
+                android:checkableBehavior="single">
+                <item android:id="@+id/device1"
+                    android:title="@string/bt_device"/>
+                <item android:id="@+id/device2"
+                    android:title="@string/bt_device"/>
+            </group>
         </menu>
     </item>
 </menu>

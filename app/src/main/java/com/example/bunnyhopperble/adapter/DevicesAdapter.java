@@ -48,7 +48,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
 
 	@FunctionalInterface
 	public interface OnItemClickListener {
-		void onItemClick(@NonNull final DiscoveredBluetoothDevice device);
+		void onItemClick(@NonNull final DiscoveredBluetoothDevice device,View view,int position);
 	}
 
 	public void setOnItemClickListener(final OnItemClickListener listener) {
@@ -113,7 +113,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
 
 			view.findViewById(R.id.device_container).setOnClickListener(v -> {
 				if (onItemClickListener != null) {
-					onItemClickListener.onItemClick(devices.get(getAdapterPosition()));
+					onItemClickListener.onItemClick(devices.get(getAdapterPosition()),view,getAdapterPosition());
 				}
 			});
 		}
